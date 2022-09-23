@@ -1,0 +1,43 @@
+version: "3.8"
+services: 
+  mongodb-v:
+    image: "mongo"
+    volumes: 
+      - data:/data/db
+    # environment:
+      # MONGO_INITDB_ROOT_USERNAME: curtis
+      # MONGO_INITDB_ROOT_USERNAME: secret
+      # alternatively a file can be used for env variables such as follows:
+      #env_file:
+      #  - ./env/mongo.env 
+  backend:
+    build: ./backend
+    # to specify a dockerfile with a different name the following can be used
+    # build:
+    #  context: ./backend
+    #  dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb-v
+    # environment:
+    # MONGO_INITDB_ROOT_USERNAME: curtis
+    # MONGO_INITDB_ROOT_USERNAME: secret
+  frontend:
+    build: ./frontend
+    ports: 
+    - "3000:3000"
+    # this is the docker-compose version of -it  
+    # stdinn_open: true
+    # tty: true
+    depends_on: 
+      - backend 
+
+volumes:
+  # only named columes must be specified here
+  data:
+  logs:
