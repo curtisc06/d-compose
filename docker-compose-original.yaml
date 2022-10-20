@@ -11,13 +11,16 @@ services:
       #env_file:
       #  - ./env/mongo.env 
   backend:
-    image: curc0006/backend
-    #build: ./backend
+    build: ./backend
+    # to specify a dockerfile with a different name the following can be used
+    # build:
+    #  context: ./backend
+    #  dockerfile: Dockerfile
     ports:
       - "90:80"
     volumes:
       - logs:/app/logs
-      - ./backend:/app
+      #- ./backend:/app
       - /app/node_modules
     depends_on:
       - mongodb
@@ -25,8 +28,7 @@ services:
     # MONGO_INITDB_ROOT_USERNAME: curtis
     # MONGO_INITDB_ROOT_USERNAME: secret
   frontend:
-    image: curc0006/frontend
-    #build: ./frontend
+    build: ./frontend
     ports: 
     - "3000:3000"
     # this is the docker-compose version of -it  

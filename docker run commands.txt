@@ -2,7 +2,7 @@ Project d: schwarz/multi-01-starting-setup
 *******************************************************************************
 MONGO
 
-   docker run --name mongodb-v -v data:/data/db --rm -d --network goals-net-v mongo
+   docker run --name mongodb -v data:/data/db --rm -d --network goals-net-v mongo
    --------------------------------------------------------------------------------
 
     
@@ -10,7 +10,7 @@ MONGO
 *******************************************************************************
 BACKEND
 
-   docker run --name goals-backend-v -v d:/schwarz/multi-01-v/backend:/app -v /app/node_modules -v logs:/app/logs --rm -d --network goals-net-v -p 80:80 goals-node-v
+   docker run --name goals-backend -v d:/schwarz/multi-01-v/backend:/app -v /app/node_modules -v logs:/app/logs --rm -d --network goals-net-v -p 90:80 goals-node-v
    --------------------------------------------------------------------------------
 
     
@@ -18,7 +18,7 @@ BACKEND
 *******************************************************************************
 FRONTEND
 
-   docker run --name goals-frontend-v --rm -d -p 3000:3000 goals-react-v
+   docker run --name goals-frontend --rm -d -p 3000:3000 goals-react-v
    ---------------------------------------------------------------------------------
 
 
