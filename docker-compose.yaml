@@ -17,7 +17,7 @@ services:
       - "90:80"
     volumes:
       - logs:/app/logs
-      - ./backend:/app
+      #- ./backend:/app
       - /app/node_modules
     depends_on:
       - mongodb
